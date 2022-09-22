@@ -1,4 +1,4 @@
-
+import signal
 import subprocess
 import os
 
@@ -7,9 +7,6 @@ if not os.path.exists('bot1.py'):
         g.write("""import requests
               import time
               import os
-              e = os.getpid()
-              with open('pid1.txt', 'w') as d:
-              d.write(str(e))
               TenK_Words = ["a", "aa", "aaa", "aaron", "ab", "abandoned", "abc", "aberdeen", "abilities", "ability", "able",
               "aboriginal", "abortion", "about", "above", "abraham", "abroad", "abs", "absence", "absent", "absolute",
               "absolutely", "absorption", "abstract", "abstracts", "abu", "abuse", "ac", "academic", "academics",
@@ -1072,9 +1069,6 @@ if not os.path.exists('bot2.py'):
 import random
 import requests
 
-e = os.getpid()
-with open('pid2.txt', 'w') as d:
-    d.write(str(e))
 letters = string.ascii_lowercase+string.digits
 while True:
     code = ''.join(random.choice(letters))
@@ -1091,5 +1085,14 @@ while True:
         pass
     time.sleep(20)''')
 
-subprocess.Popen('bot1.py')
-subprocess.Popen('bot2.py')
+sub1 = subprocess.Popen('bot1.py')
+sub2 = subprocess.Popen('bot2.py')
+while True:
+    command = input('Command>> ')
+    if command == 'stop':
+        os.killpg(os.getpgid(sub1.pid), signal.SIGTERM)
+        os.killpg(os.getpgid(sub2.pid), signal.SIGTERM)
+    elif command == 'stop1':
+        os.killpg(os.getpgid(sub1.pid), signal.SIGTERM) 
+    elif command == 'stop2':
+        os.killpg(os.getpgid(sub2.pid), signal.SIGTERM) 
