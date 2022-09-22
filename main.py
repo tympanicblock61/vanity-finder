@@ -1085,14 +1085,14 @@ while True:
         pass
     time.sleep(20)''')
 
-sub1 = subprocess.Popen('bot1.py')
-sub2 = subprocess.Popen('bot2.py')
+sub1 = subprocess.Popen('py bot1.py')
+sub2 = subprocess.Popen('py bot2.py')
 while True:
     command = input('Command>> ')
     if command == 'stop':
         os.killpg(os.getpgid(sub1.pid), signal.SIGTERM)
         os.killpg(os.getpgid(sub2.pid), signal.SIGTERM)
     elif command == 'stop1':
-        os.killpg(os.getpgid(sub1.pid), signal.SIGTERM) 
+        os.killpg(os.getpgid(sub1.pid), signal.SIGTERM)
     elif command == 'stop2':
-        os.killpg(os.getpgid(sub2.pid), signal.SIGTERM) 
+        os.killpg(os.getpgid(sub2.pid), signal.SIGTERM)
